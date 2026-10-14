@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A colorful dashboard to organize and track student assignments.">
+  <title>StudyFlow | Assignment Tracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#"><span class="brand-mark">S</span><span>StudyFlow<small>STUDENT PLANNER</small></span></a>
+      <div class="nav-label">WORKSPACE</div>
+      <button class="nav-item active" data-filter="all"><span>▦</span> Dashboard</button>
+      <button class="nav-item" data-filter="pending"><span>◷</span> Pending</button>
+      <button class="nav-item" data-filter="completed"><span>✓</span> Completed</button>
+      <div class="sidebar-tip"><span class="tip-icon">✦</span><strong>Small steps add up.</strong><p>Stay organized, meet your deadlines, and make time for what matters.</p></div>
+      <div class="sidebar-footer"><span class="avatar">S</span><span><strong>Student Workspace</strong><small>Personal planner</small></span></div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar"><div><p class="eyebrow">YOUR STUDY SPACE</p><h1>Assignment dashboard</h1><p class="subtitle">A little progress every day goes a long way.</p></div><div class="today-pill">📅 <span id="todayLabel">Today</span></div></header>
+
+      <section class="stats-grid" aria-label="Assignment summary">
+        <article class="stat-card purple"><div class="stat-top"><span>Total assignments</span><span class="stat-icon">▤</span></div><div class="stat-number" id="totalCount">0</div><div class="stat-note">Across all your subjects</div></article>
+        <article class="stat-card orange"><div class="stat-top"><span>Pending</span><span class="stat-icon">◷</span></div><div class="stat-number" id="pendingCount">0</div><div class="stat-note">Still on your to-do list</div></article>
+        <article class="stat-card green"><div class="stat-top"><span>Completed</span><span class="stat-icon">✓</span></div><div class="stat-number" id="completedCount">0</div><div class="stat-note">Look at you go!</div></article>
+        <article class="stat-card pink"><div class="stat-top"><span>Overdue</span><span class="stat-icon">!</span></div><div class="stat-number" id="overdueCount">0</div><div class="stat-note">Past due and not completed</div></article>
+      </section>
+
+      <section class="content-grid">
+        <div class="panel assignments-panel">
+          <div class="panel-heading"><div><h2 id="listHeading">Your assignments</h2><p>Keep every task in one place.</p></div><button class="primary-btn" id="addAssignmentBtn">＋ Add assignment</button></div>
+          <div class="toolbar"><label class="search-box">⌕ <input id="searchInput" type="search" placeholder="Search assignments..." aria-label="Search assignments"></label><select id="subjectFilter" aria-label="Filter by subject"><option value="all">All subjects</option></select><select id="sortFilter" aria-label="Sort assignments"><option value="deadline">Sort: deadline</option><option value="priority">Sort: priority</option><option value="newest">Sort: newest</option></select></div>
+          <div id="assignmentList" class="assignment-list"></div>
+          <div id="emptyState" class="empty-state"><div class="empty-illustration">✎</div><h3>Nothing here yet</h3><p>Add your first assignment and make a plan for success.</p><button class="primary-btn" id="emptyAddBtn">＋ Add your first assignment</button></div>
+        </div>
+
+        <aside class="panel form-panel" id="formPanel">
+          <div class="panel-heading"><div><h2 id="formHeading">Quick add</h2><p>Capture it before you forget.</p></div><span class="form-sparkle">✦</span></div>
+          <form id="assignmentForm">
+            <input type="hidden" id="editId">
+            <label for="titleInput">Assignment title</label><input id="titleInput" maxlength="100" required placeholder="e.g. Prepare DBMS notes">
+            <label for="subjectInput">Subject</label><input id="subjectInput" maxlength="60" required placeholder="e.g. Database Management">
+            <div class="form-row"><div><label for="deadlineInput">Due date</label><input id="deadlineInput" type="date" required></div><div><label for="priorityInput">Priority</label><select id="priorityInput"><option value="Medium">Medium</option><option value="High">High</option><option value="Low">Low</option></select></div></div>
+            <label for="notesInput">Notes <span class="optional">(optional)</span></label><textarea id="notesInput" rows="3" maxlength="300" placeholder="Any details to remember..."></textarea>
+            <button class="primary-btn submit-btn" type="submit" id="saveBtn">Add assignment <span>→</span></button>
+            <button class="text-btn hidden" type="button" id="cancelEditBtn">Cancel editing</button>
+          </form>
+          <div class="progress-card"><div class="progress-title"><span>✨ Your progress</span><strong id="progressPercent">0%</strong></div><div class="progress-track"><div id="progressBar" class="progress-fill"></div></div><p id="progressText">Complete a task to start your progress streak.</p></div>
+        </aside>
+      </section>
+      <footer class="page-footer">Made for focused minds <span>✦</span> Your assignments are saved in this browser.</footer>
+    </main>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
